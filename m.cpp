@@ -1,19 +1,31 @@
 #include "Hastable.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+
+using namespace std;
 
 void main()
 {
-	Table<int,double> t(15);
-	t.addElem(100.1, 15);
-	t.addElem(102.1, 37);
-	t.addElem(101.2, 49);
-	t.addElem(103.2, 41);
+	Table<int,string> t(15);
+	
+	ifstream file("base.txt");
+	string str;
+	int key;
+	int counter = 0;
+	while (getline(file, str, '\n'))
+	{
 
-	std::cout << t[15] << std::endl;
-	std::cout << t[37] << std::endl;
-	std::cout << t[49] << std::endl;
-	std::cout << t[41] << std::endl;
+		if (counter % 2 == 0)
+			key = stoi(str);
+		else
+			t.addElem(str, key);
+		counter++;
+	}
+
+	cout << t[15] << t[27] << t[34];
+
+
 	t.resize(25);
 
 	std::cin.get();
